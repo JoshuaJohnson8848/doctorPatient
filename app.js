@@ -27,7 +27,7 @@ const authRoutePatient = require('./routes/patient/auth');
 const authRouteDoctor = require('./routes/doctor/auth');
 
 app.use('/authPatient', authRoutePatient);
-app.use('/authDoctor');
+app.use('/authDoctor', authRouteDoctor);
 
 app.use((error, req, res, next) => {
   const data = error.data;
