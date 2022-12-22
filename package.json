@@ -1,0 +1,28 @@
+{
+  "name": "doctorpatient",
+  "version": "1.0.0",
+  "description": "Doctor Patient Consultancy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoshuaJohnson8848/doctorPatient.g.git"
+  },
+  "author": "Joshua Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoshuaJohnson8848/doctorPatient.g/issues"
+  },
+  "homepage": "https://github.com/JoshuaJohnson8848/doctorPatient.g#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
