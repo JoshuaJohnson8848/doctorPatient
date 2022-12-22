@@ -30,7 +30,7 @@ const doctorSchema = new Schema(
       {
         appntmtId: {
           type: Schema.Types.ObjectId,
-          ref: '',
+          ref: 'Appointment',
         },
       },
     ],
