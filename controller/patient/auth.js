@@ -1,5 +1,6 @@
 const Patient = require('../../models/patients');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res, next) => {
   const name = req.body.name;
@@ -30,6 +31,46 @@ exports.signup = async (req, res, next) => {
       message: 'Patient Successfully Created',
       patient: createdPatient,
     });
+  } catch (err) {
+    if (!err.status) {
+      err.status = 500;
+    }
+    next(err);
+  }
+};
+
+exports.login = async (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  try {
+    const patient = await Patient.findOne({ email: email });
+    if (!patient) {
+      const error = new Error('Patient Not Found With this Email');
+      error.status = 422;
+      throw error;
+    }
+    loadedPatient = patient;
+    const hashedPass = await bcrypt.compare(password, loadedPatient.password);
+    if (!hashedPass) {
+      const error = new Error('Password Incorrect');
+      error.status = 500;
+      throw error;
+    }
+    const token = await jwt.sign(
+      {
+        email: email,
+        patientId: loadedPatient._id.toString(),
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '1h' }
+    );
+    res
+      .status(200)
+      .json({
+        message: 'Logged In Successfully',
+        token: token,
+        patientId: loadedPatient._id.toString(),
+      });
   } catch (err) {
     if (!err.status) {
       err.status = 500;
