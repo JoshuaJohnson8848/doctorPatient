@@ -19,7 +19,11 @@ app.use((req, res, next) => {
   next();
 });
 
+const authRoute = require('./routes/auth');
+
 dotenv.config({ path: './config/.env' });
+
+app.use('/auth', authRoute);
 
 mongoose.set('strictQuery', true);
 mongoose
