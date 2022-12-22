@@ -29,7 +29,7 @@ const doctorRoute = require('./routes/doctor/doctor');
 
 app.use('/authPatient', authRoutePatient);
 app.use('/authDoctor', authRouteDoctor);
-app.use('/doctor');
+app.use('/doctor', doctorRoute);
 
 app.use((error, req, res, next) => {
   const data = error.data;
