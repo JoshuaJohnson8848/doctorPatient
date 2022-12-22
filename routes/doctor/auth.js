@@ -4,4 +4,6 @@ const authController = require('../../controller/doctor/auth');
 
 router.post('/signup', authController.signup);
 
+router.post('/login', authController.login);
+
 module.exports = router;
