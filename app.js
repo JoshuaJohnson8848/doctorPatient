@@ -25,9 +25,11 @@ dotenv.config({ path: './config/.env' });
 
 const authRoutePatient = require('./routes/patient/auth');
 const authRouteDoctor = require('./routes/doctor/auth');
+const doctorRoute = require('./routes/doctor/doctor');
 
 app.use('/authPatient', authRoutePatient);
 app.use('/authDoctor', authRouteDoctor);
+app.use('/doctor');
 
 app.use((error, req, res, next) => {
   const data = error.data;
