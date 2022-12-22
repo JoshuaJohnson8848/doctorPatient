@@ -28,14 +28,9 @@ const doctorSchema = new Schema(
     },
     appointments: [
       {
-        patientId: {
+        appntmt: {
           type: Schema.Types.ObjectId,
-          required: true,
-          ref: 'Patient',
-        },
-        date: {
-          type: Date,
-          required: true,
+          ref: '',
         },
       },
     ],
