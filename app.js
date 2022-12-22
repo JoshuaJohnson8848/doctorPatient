@@ -2,8 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
 
 app.use(express.json());
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,6 +26,13 @@ dotenv.config({ path: './config/.env' });
 const authRoutePatient = require('./routes/patient/auth');
 
 app.use('/authPatient', authRoutePatient);
+
+app.use((error, req, res, next) => {
+  const data = error.data;
+  const message = error.message;
+  const status = error.status || 500;
+  res.status(status).json({ message: message, data: data });
+});
 
 mongoose.set('strictQuery', true);
 mongoose
