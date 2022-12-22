@@ -4,4 +4,6 @@ const doctorController = require('../../controller/doctor/doctor');
 
 router.get('', doctorController.getAll);
 
+router.get('/:id');
+
 module.exports = router;
