@@ -1,5 +1,6 @@
 const Doctor = require('../../models/doctors');
 const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose');
 
 exports.signup = async (req, res, next) => {
   const name = req.body.name;
@@ -26,6 +27,7 @@ exports.signup = async (req, res, next) => {
       password: hashPass,
       phone: phone,
       specialisation: specialisation,
+      pinnedPatient: mongoose.Types.ObjectId('4edd40c86762e0fb12000003'), //Dummy Data
     });
     const createdDoctor = await doctor.save();
     res
