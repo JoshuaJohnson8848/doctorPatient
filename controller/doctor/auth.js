@@ -42,7 +42,7 @@ exports.signup = async (req, res, next) => {
   }
 };
 
-module.exports = async (req, res, next) => {
+exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
   try {
@@ -67,13 +67,11 @@ module.exports = async (req, res, next) => {
       process.env.JWT_SECRET,
       { expiresIn: '1h' }
     );
-    res
-      .status(200)
-      .json({
-        message: 'Logged In Successfully',
-        token: token,
-        doctorId: loadedDoctor._id,
-      });
+    res.status(200).json({
+      message: 'Logged In Successfully',
+      token: token,
+      doctorId: loadedDoctor._id,
+    });
   } catch (err) {
     if (!err.status) {
       err.status = 500;
