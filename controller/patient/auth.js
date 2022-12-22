@@ -37,5 +37,3 @@ exports.signup = async (req, res, next) => {
     next(err);
   }
 };
-
-exports.login = (req, res, next) => {};
