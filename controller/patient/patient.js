@@ -20,7 +20,7 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
-  const patientId = req.body.id;
+  const patientId = req.params.id;
   try {
     const patient = await Patient.findById(patientId);
     if (!patient) {
