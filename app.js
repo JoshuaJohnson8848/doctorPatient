@@ -26,10 +26,12 @@ dotenv.config({ path: './config/.env' });
 const authRoutePatient = require('./routes/patient/auth');
 const authRouteDoctor = require('./routes/doctor/auth');
 const doctorRoute = require('./routes/doctor/doctor');
+const patientRoute = require('./routes/patient/patient');
 
 app.use('/authPatient', authRoutePatient);
 app.use('/authDoctor', authRouteDoctor);
 app.use('/doctor', doctorRoute);
+app.use('/patient', patientRoute);
 
 app.use((error, req, res, next) => {
   const data = error.data;
