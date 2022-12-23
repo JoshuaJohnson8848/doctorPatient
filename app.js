@@ -33,7 +33,7 @@ app.use('/authPatient', authRoutePatient);
 app.use('/authDoctor', authRouteDoctor);
 app.use('/doctor', doctorRoute);
 app.use('/patient', patientRoute);
-app.use('/appmnt');
+app.use('/appmnt', appoinmentRoute);
 
 app.use((error, req, res, next) => {
   const data = error.data;
