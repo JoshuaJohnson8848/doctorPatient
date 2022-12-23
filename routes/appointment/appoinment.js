@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const appoinmentController = require('../../controller/appoinment/appoinment');
+const isAuthP = require('../../middleware/isAuthP');
 
-router.post('');
+router.post('/:id', isAuthP, appoinmentController.addAppmnt);
 
 module.exports = router;
