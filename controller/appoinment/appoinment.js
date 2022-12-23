@@ -1,3 +1,4 @@
+const { populate } = require('../../models/appointment');
 const Appoinment = require('../../models/appointment');
 const Doctor = require('../../models/doctors');
 
@@ -28,3 +29,5 @@ exports.addAppmnt = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.listAppmnt = async (req, res, next) => {};
