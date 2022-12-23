@@ -18,3 +18,21 @@ exports.getAll = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.getById = async (req, res, next) => {
+  const patientId = req.params.id;
+  try {
+    const patient = await Patient.findById(patientId);
+    if (!patient) {
+      const error = new Error('Patient Not Found');
+      error.status = 404;
+      throw error;
+    }
+    res.status(200).json({ message: 'Patient Found Successfully', patient });
+  } catch (err) {
+    if (!err.status) {
+      err.status = 500;
+    }
+    next(err);
+  }
+};
