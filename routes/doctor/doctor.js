@@ -6,4 +6,6 @@ router.get('', doctorController.getAll);
 
 router.get('/:id', doctorController.getById);
 
+router.post('/:id');
+
 module.exports = router;
