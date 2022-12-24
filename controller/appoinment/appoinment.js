@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Appoinment = require('../../models/appointment');
 const Doctor = require('../../models/doctors');
+const Patient = require('../../models/patients');
 
 exports.addAppmnt = async (req, res, next) => {
   const doctorId = req.params.id;
@@ -30,4 +31,30 @@ exports.addAppmnt = async (req, res, next) => {
   }
 };
 
-exports.listAppmnt = async (req, res, next) => {};
+exports.listAppmnt = async (req, res, next) => {
+  const doctorId = req.doctorId;
+  try {
+    const pArray = [];
+    let populatedPatient = [];
+    const doctor = await Doctor.findById(doctorId)
+      .populate('appointments')
+      .exec();
+    doctor.appointments.forEach((p) => {
+      pArray.push(p.patientId);
+    });
+    for (i = 0; i < pArray.length; i++) {
+      const popPatient = await Patient.findById(pArray[i]);
+      populatedPatient.push(popPatient);
+    }
+    res.status(200).json({
+      message: 'Appointment List fetched',
+      appoinments: doctor.appointments,
+      patientsDetails: populatedPatient,
+    });
+  } catch (err) {
+    if (!err.status) {
+      err.status = 500;
+    }
+    next(err);
+  }
+};
