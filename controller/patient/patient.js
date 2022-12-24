@@ -2,6 +2,11 @@ const Patient = require('../../models/patients');
 
 exports.getAll = async (req, res, next) => {
   try {
+    if (!isAuth) {
+      const error = new Error('Not Authenticated');
+      error.status = 401;
+      throw error;
+    }
     const patients = await Patient.find();
     if (!patients) {
       const error = new Error('Patients Not Found');
@@ -20,6 +25,11 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
+  if (!isAuth) {
+    const error = new Error('Not Authenticated');
+    error.status = 401;
+    throw error;
+  }
   const patientId = req.params.id;
   try {
     const patient = await Patient.findById(patientId);

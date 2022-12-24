@@ -8,6 +8,11 @@ exports.addAppmnt = async (req, res, next) => {
   const patientId = req.patientId;
   const dateTime = req.body.dateTime;
   try {
+    if (!isAuth) {
+      const error = new Error('Not Authenticated');
+      error.status = 401;
+      throw error;
+    }
     const appoinment = await new Appoinment({
       doctorId: doctorId,
       patientId: patientId,
@@ -32,6 +37,11 @@ exports.addAppmnt = async (req, res, next) => {
 };
 
 exports.listAppmnt = async (req, res, next) => {
+  if (!isAuth) {
+    const error = new Error('Not Authenticated');
+    error.status = 401;
+    throw error;
+  }
   const doctorId = req.doctorId;
   try {
     const pArray = [];
