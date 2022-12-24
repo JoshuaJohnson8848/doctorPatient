@@ -28,7 +28,7 @@ exports.signup = async (req, res, next) => {
       password: hashPass,
       phone: phone,
       specialisation: specialisation,
-      pinnedPatient: mongoose.Types.ObjectId('4edd40c86762e0fb12000003'), //Dummy Data
+      // pinnedPatient: mongoose.Types.ObjectId('4edd40c86762e0fb12000003'), //Dummy Data
     });
     const createdDoctor = await doctor.save();
     res
