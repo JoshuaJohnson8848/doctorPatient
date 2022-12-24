@@ -1,4 +1,4 @@
-const { populate } = require('../../models/appointment');
+const mongoose = require('mongoose');
 const Appoinment = require('../../models/appointment');
 const Doctor = require('../../models/doctors');
 
