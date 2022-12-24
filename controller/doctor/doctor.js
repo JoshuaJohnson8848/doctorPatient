@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 
 exports.getAll = async (req, res, next) => {
   try {
+    if (!isAuth) {
+      const error = new Error('Not Authenticated');
+      error.status = 401;
+      throw error;
+    }
     const doctors = await Doctor.find();
     if (!doctors) {
       const error = new Error('No Doctors Found');
@@ -19,6 +24,11 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
+  if (!isAuth) {
+    const error = new Error('Not Authenticated');
+    error.status = 401;
+    throw error;
+  }
   const doctorId = req.params.id;
   try {
     const doctor = await Doctor.findById(doctorId);
@@ -37,6 +47,11 @@ exports.getById = async (req, res, next) => {
 };
 
 exports.pinPatient = async (req, res, next) => {
+  if (!isAuth) {
+    const error = new Error('Not Authenticated');
+    error.status = 401;
+    throw error;
+  }
   const doctorId = req.doctorId;
   const patientId = req.params.patientId;
   try {
