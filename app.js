@@ -46,8 +46,30 @@ mongoose.set('strictQuery', true);
 mongoose
   .connect(process.env.MONGOURI)
   .then((result) => {
-    app.listen(process.env.PORT, (req, res, next) => {
+    const server = app.listen(process.env.PORT, (req, res, next) => {
       console.log(`Server is Running at PORT ${process.env.PORT}`);
+    });
+    const io = require('socket.io')(server);
+    io.on('connection', (socket) => {
+      Msg.find().then((result) => {
+        socket.emit('output-messages', result);
+      });
+      console.log('a user connected');
+      socket.emit('message');
+      socket.on('disconnect', () => {
+        Msg.deleteMany().then((result) => {
+          socket.emit('output-messages', result);
+        });
+        console.log('user disconnected');
+      });
+      socket.on('chatmessage', (msg, id) => {
+        const message = new Msg({
+          msg,
+        });
+        message.save().then(() => {
+          io.emit('message', msg);
+        });
+      });
     });
   })
   .catch((err) => {
