@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const isAuthD = require('../../middleware/isAuthD');
+const isAuthP = require('../../middleware/isAuthP');
 const Appoinment = require('../../models/appointment');
 const Doctor = require('../../models/doctors');
 const Patient = require('../../models/patients');
@@ -8,7 +10,7 @@ exports.addAppmnt = async (req, res, next) => {
   const patientId = req.patientId;
   const dateTime = req.body.dateTime;
   try {
-    if (!isAuth) {
+    if (!isAuthP) {
       const error = new Error('Not Authenticated');
       error.status = 401;
       throw error;
@@ -37,7 +39,7 @@ exports.addAppmnt = async (req, res, next) => {
 };
 
 exports.listAppmnt = async (req, res, next) => {
-  if (!isAuth) {
+  if (!isAuthD) {
     const error = new Error('Not Authenticated');
     error.status = 401;
     throw error;
