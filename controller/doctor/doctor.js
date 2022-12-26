@@ -1,10 +1,12 @@
 const Doctor = require('../../models/doctors');
 const Patient = require('../../models/patients');
 const mongoose = require('mongoose');
+const isAuthP = require('../../middleware/isAuthP');
+const isAuthD = require('../../middleware/isAuthD');
 
 exports.getAll = async (req, res, next) => {
   try {
-    if (!isAuth) {
+    if (!isAuthP) {
       const error = new Error('Not Authenticated');
       error.status = 401;
       throw error;
@@ -24,7 +26,7 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
-  if (!isAuth) {
+  if (!isAuthP) {
     const error = new Error('Not Authenticated');
     error.status = 401;
     throw error;
@@ -47,7 +49,7 @@ exports.getById = async (req, res, next) => {
 };
 
 exports.pinPatient = async (req, res, next) => {
-  if (!isAuth) {
+  if (!isAuthD) {
     const error = new Error('Not Authenticated');
     error.status = 401;
     throw error;
