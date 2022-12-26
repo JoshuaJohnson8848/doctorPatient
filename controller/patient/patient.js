@@ -1,8 +1,9 @@
+const isAuthD = require('../../middleware/isAuthD');
 const Patient = require('../../models/patients');
 
 exports.getAll = async (req, res, next) => {
   try {
-    if (!isAuth) {
+    if (!isAuthD) {
       const error = new Error('Not Authenticated');
       error.status = 401;
       throw error;
@@ -25,7 +26,7 @@ exports.getAll = async (req, res, next) => {
 };
 
 exports.getById = async (req, res, next) => {
-  if (!isAuth) {
+  if (!isAuthD) {
     const error = new Error('Not Authenticated');
     error.status = 401;
     throw error;
