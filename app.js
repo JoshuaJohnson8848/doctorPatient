@@ -41,6 +41,7 @@ app.use((error, req, res, next) => {
   const message = error.message;
   const status = error.status || 500;
   res.status(status).json({ message: message, data: data });
+  next();
 });
 
 mongoose.set('strictQuery', true);
